@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://127.0.0.1/studyspringboot?characterEncoding=utf-8&serverTimezone=GMT&useSSL=false
+  jpa:
+    show-sql: true
+  jackson:
+    default-property-inclusion: non_null
+#1、上线时需要改变日志输出的位置
+server:
+  servlet:
+    context-path: "/WxSpringboot"
+#logging:
+#  pattern:
+#    console: "%d-%msg%n"
+##  path: "F:\\LogInfo"
+#  file: "F:\\LogInfo/file.log"
