@@ -17,3 +17,6 @@ server:
 #    console: "%d-%msg%n"
 ##  path: "F:\\LogInfo"
 #  file: "F:\\LogInfo/file.log"
+wechat:
+  mpAppId: 1111111
+  mpSecret: 11111111

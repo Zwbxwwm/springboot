@@ -12,7 +12,8 @@ public enum ExceptionEnum {
     ORDER_ERROR(60,"订单错状态错误"),
     PARAM_ERROR(70,"参数错误"),
     CART_NULL(80,"购物车为空"),
-    IDENTITY_ERROR(90,"用户身份错误");
+    IDENTITY_ERROR(90,"用户身份错误"),
+    WX_LOGIN_ERROR(100,"用户登录错误");
 
     private  final  Integer code;
     private  final  String msg;
