@@ -10,4 +10,20 @@ import org.springframework.stereotype.Component;
 public class wechatAccountConfig {
     private  String mpAppId;
     private  String mpSecret;
+    /*
+    商户号
+     */
+    private String mchId;
+    /*
+    商户密钥
+     */
+    private String mchKey;
+    /*
+    商户证书
+     */
+    private String keyPath;
+    /*
+    微信异步通知地址
+     */
+    private String notifyUrl;
 }

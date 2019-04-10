@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.net.URLEncoder;
 
 @RestController
-@RequestMapping("/WX")
+@RequestMapping("/login")
 @Slf4j
-public class WXController {
+public class WxLoginController {
     @Autowired
     private WxMpService wxMpService;
 

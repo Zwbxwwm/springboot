@@ -20,3 +20,7 @@ server:
 wechat:
   mpAppId: 1111111
   mpSecret: 11111111
+  mchId: adasdsd
+  mchKey: xxxxxx
+  mkeyPath: xxxxxxx
+  notifyUrl: http://www.xiingluote.cn/WxSpringboot/pay/noify
