@@ -1,6 +1,10 @@
 package com.springboot.sspringboot.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.springboot.sspringboot.Enum.OrderStatus;
+import com.springboot.sspringboot.Enum.PayStatus;
 import com.springboot.sspringboot.entity.OrderDetail;
+import com.springboot.sspringboot.utils.EnumUtil;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -36,4 +40,13 @@ public class OrderDTO {
     private Date updateTime;
 
     private List<OrderDetail> orderDetailList;
+
+    @JsonIgnore
+    public  OrderStatus getOrderStatusEnum( ){
+        return EnumUtil.getEnumByCode(orderStatus,OrderStatus.class);
+    }
+    @JsonIgnore
+    public PayStatus getPayStatusEnum( ){
+        return EnumUtil.getEnumByCode(payStatus, PayStatus.class);
+    }
 }

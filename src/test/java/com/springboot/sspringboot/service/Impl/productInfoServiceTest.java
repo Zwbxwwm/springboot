@@ -37,7 +37,7 @@ public class productInfoServiceTest {
 
     @Test
     public void findAllTest(){
-        PageRequest request = PageRequest.of(0,1);
+        PageRequest request = PageRequest.of(1,10);
         Page<ProductInfo> pages = productInfoService.findAll(request);
         Assert.assertNotEquals(0,pages.getTotalElements());
     }
@@ -62,5 +62,10 @@ public class productInfoServiceTest {
         CartDTO cartDTO1 = new CartDTO("321",10);
         cartDTOList.add(cartDTO1);
         productInfoService.decreaseStock(cartDTOList);
+    }
+
+    @Test
+    public void off_productTest() {
+
     }
 }

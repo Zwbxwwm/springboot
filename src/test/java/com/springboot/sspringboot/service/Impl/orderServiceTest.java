@@ -1,6 +1,7 @@
 package com.springboot.sspringboot.service.Impl;
 
 import com.springboot.sspringboot.Enum.OrderStatus;
+import com.springboot.sspringboot.Enum.PayStatus;
 import com.springboot.sspringboot.dto.OrderDTO;
 import com.springboot.sspringboot.entity.OrderDetail;
 import lombok.extern.slf4j.Slf4j;
@@ -88,6 +89,6 @@ public class orderServiceTest {
     public void payOrderTest() {
         OrderDTO orderDTO = orderService.findOne(ORDER_ID);
         OrderDTO orderDTO1 =orderService.payOrder(orderDTO);
-        Assert.assertNotEquals(OrderStatus.HAVE_PAY,orderDTO1.getPayStatus());
+        Assert.assertNotEquals(PayStatus.HAVE_PAY,orderDTO1.getPayStatus());
     }
 }

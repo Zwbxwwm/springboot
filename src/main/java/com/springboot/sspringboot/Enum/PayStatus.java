@@ -1,19 +1,20 @@
 package com.springboot.sspringboot.Enum;
 
-public enum ResponseCode {
-    SUCCESS(0,"请求成功"),
-    ERROR(1,"请求失败"),
-    ERROR_VALID(70,"传入参数有误"),
-    LOGOUT(100,"登出成功");
+public enum PayStatus implements codeEnum {
+    UN_PAY(0,"未支付"),
+    HAVE_PAY(1,"已支付");
+
     private final int code;
     private final String msg;
 
-    ResponseCode(int code, String msg) {
+    PayStatus(int code, String msg) {
         this.code = code;
         this.msg = msg;
     }
 
-    public int getCode() {
+
+    @Override
+    public Integer getCode() {
         return code;
     }
 

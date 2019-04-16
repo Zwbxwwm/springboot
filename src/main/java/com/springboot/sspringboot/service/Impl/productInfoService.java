@@ -1,6 +1,7 @@
 package com.springboot.sspringboot.service.Impl;
 
 import com.springboot.sspringboot.Enum.ExceptionEnum;
+import com.springboot.sspringboot.Enum.ProductStatus;
 import com.springboot.sspringboot.dao.ProductInfoRepository;
 import com.springboot.sspringboot.dto.CartDTO;
 import com.springboot.sspringboot.entity.ProductInfo;
@@ -69,5 +70,25 @@ public class productInfoService implements IProductInfoService {
             productInfo.setProductStock(resultStock);
             infoRepository.save(productInfo);
         }
+    }
+
+    public void off_product(String productId){
+        ProductInfo productInfo = infoRepository.findById(productId).get();
+        if(productInfo==null){
+            log.info("【下架产品】该商品不存在，productId={}",productInfo.getProductId());
+            throw new sellException(ExceptionEnum.NOT_EXIT);
+        }
+        productInfo.setProductStatus(ProductStatus.OUT_SALE.getCode());
+        infoRepository.save(productInfo);
+    }
+
+    public void on_product(String productId){
+        ProductInfo productInfo =infoRepository.findById(productId).get();
+        if(productInfo==null){
+            log.info("【下架产品】该商品不存在，productId={}",productInfo.getProductId());
+            throw new sellException(ExceptionEnum.NOT_EXIT);
+        }
+        productInfo.setProductStatus(ProductStatus.ON_SALE.getCode());
+        infoRepository.save(productInfo);
     }
 }

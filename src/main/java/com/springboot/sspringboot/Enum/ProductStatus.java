@@ -1,6 +1,6 @@
 package com.springboot.sspringboot.Enum;
 
-public enum ProductStatus {
+public enum ProductStatus implements codeEnum{
     ON_SALE(0,"此产品上架状态"),
     OUT_SALE(1,"此产品已下架");
     private final  int code;
@@ -11,7 +11,7 @@ public enum ProductStatus {
         this.msg=msg;
     }
 
-    public int getCode() {
+    public Integer getCode() {
         return code;
     }
 

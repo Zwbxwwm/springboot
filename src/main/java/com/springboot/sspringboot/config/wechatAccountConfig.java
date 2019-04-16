@@ -1,6 +1,7 @@
 package com.springboot.sspringboot.config;
 
 import lombok.Data;
+import org.omg.CORBA.PRIVATE_MEMBER;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +11,9 @@ import org.springframework.stereotype.Component;
 public class wechatAccountConfig {
     private  String mpAppId;
     private  String mpSecret;
+
+    private String openAppId;
+    private String openAppSecret;
     /*
     商户号
      */

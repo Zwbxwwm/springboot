@@ -2,6 +2,7 @@ package com.springboot.sspringboot.entity;
 
 
 import com.springboot.sspringboot.Enum.OrderStatus;
+import com.springboot.sspringboot.Enum.PayStatus;
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -33,7 +34,7 @@ public class OrderMaster {
     /**默认是新的订单*/
     private Integer orderStatus = OrderStatus.NEW_ORDER.getCode();
 
-    private Integer payStatus =OrderStatus.UN_PAY.getCode();
+    private Integer payStatus = PayStatus.UN_PAY.getCode();
 
     private Date createTime;
 

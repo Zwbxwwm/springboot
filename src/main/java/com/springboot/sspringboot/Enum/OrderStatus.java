@@ -1,13 +1,11 @@
 package com.springboot.sspringboot.Enum;
 
-public enum OrderStatus {
+public enum OrderStatus implements codeEnum {
     NEW_ORDER(0,"新订单"),
     FINISH_ORDER(1,"已完结订单"),
-    CANCEL_ORDER(2,"已取消订单"),
+    CANCEL_ORDER(2,"已取消订单"),;
 
     //订单支付状态
-    UN_PAY(0,"未支付"),
-    HAVE_PAY(1,"已支付");
 
     private final int code;
     private final String msg;
@@ -17,7 +15,7 @@ public enum OrderStatus {
         this.msg=msg;
     }
 
-    public int getCode() {
+    public Integer getCode() {
         return code;
     }
 

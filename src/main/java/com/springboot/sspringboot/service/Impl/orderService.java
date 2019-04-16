@@ -2,6 +2,7 @@ package com.springboot.sspringboot.service.Impl;
 
 import com.springboot.sspringboot.Enum.ExceptionEnum;
 import com.springboot.sspringboot.Enum.OrderStatus;
+import com.springboot.sspringboot.Enum.PayStatus;
 import com.springboot.sspringboot.converter.OrderDetail2CartDTOConverter;
 import com.springboot.sspringboot.converter.OrderMaster2OrderDTOConverter;
 import com.springboot.sspringboot.dao.OrderDetailRepository;
@@ -13,6 +14,7 @@ import com.springboot.sspringboot.entity.OrderMaster;
 import com.springboot.sspringboot.entity.ProductInfo;
 import com.springboot.sspringboot.exception.sellException;
 import com.springboot.sspringboot.service.IOrderService;
+import com.springboot.sspringboot.service.IWxPayService;
 import com.springboot.sspringboot.utils.IdUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -43,6 +45,9 @@ public class orderService implements IOrderService {
     @Autowired
     private OrderMasterRepository orderMasterRepository;
 
+    @Autowired
+    private IWxPayService iWxPayService;
+
     @Override
     @Transactional
     public OrderDTO create(OrderDTO orderDTO) {
@@ -70,7 +75,7 @@ public class orderService implements IOrderService {
         BeanUtils.copyProperties(orderDTO,orderMaster);
         orderMaster.setOrderAmount(totalPrice);
         orderMaster.setOrderStatus(OrderStatus.NEW_ORDER.getCode());
-        orderMaster.setPayStatus(OrderStatus.UN_PAY.getCode());
+        orderMaster.setPayStatus(PayStatus.UN_PAY.getCode());
         orderMasterRepository.save(orderMaster);
         //减去库存
         List<CartDTO> cartDTOList = new ArrayList<>();
@@ -82,10 +87,13 @@ public class orderService implements IOrderService {
     @Override
     public OrderDTO findOne(String orderId) {
         OrderDTO orderDTO =new OrderDTO();
-        OrderMaster orderMaster = orderMasterRepository.findById(orderId).get();
-        if(orderMaster==null){
+        OrderMaster orderMaster = null;
+        try {
+            orderMaster = orderMasterRepository.findById(orderId).get();
+        } catch (Exception e) {
             throw new sellException(ExceptionEnum.ORDER_NOT_EXIT);
         }
+
         List<OrderDetail> orderDetails = orderDetailRepository.findByOrderId(orderId);
 
         if(CollectionUtils.isEmpty(orderDetails)){
@@ -127,8 +135,8 @@ public class orderService implements IOrderService {
         List<OrderDetail> orderDetailList = orderDetailRepository.findByOrderId(orderId);
         List<CartDTO> cartDTOList =  OrderDetail2CartDTOConverter.convert(orderDetailList);
         productInfoService.increaseStock(cartDTOList);
-        if(orderMaster.getPayStatus().equals(OrderStatus.HAVE_PAY)){
-            // TODO: 2019/4/5
+        if(orderMaster.getPayStatus().equals(PayStatus.HAVE_PAY)){
+            iWxPayService.refund(orderDTO);
         }
         orderMasterRepository.save(orderMaster);
         return orderDTO;
@@ -156,13 +164,13 @@ public class orderService implements IOrderService {
             log.info("【完结订单】 订单状态错误，payStatus = {}",orderDTO.getPayStatus());
             throw  new sellException(ExceptionEnum.ORDER_ERROR);
         }
-        if(!orderDTO.getPayStatus().equals(OrderStatus.UN_PAY.getCode())){
+        if(!orderDTO.getPayStatus().equals(PayStatus.UN_PAY.getCode())){
             log.info("【订单支付】 该订单已支付, orderId={},orderPayStatus={}",orderDTO.getOrderId(),orderDTO.getPayStatus());
             throw new sellException(ExceptionEnum.ORDER_ERROR);
         }
 
         OrderMaster orderMaster = new OrderMaster();
-        orderDTO.setPayStatus(OrderStatus.HAVE_PAY.getCode());
+        orderDTO.setPayStatus(PayStatus.HAVE_PAY.getCode());
         BeanUtils.copyProperties(orderDTO,orderMaster);
         orderMasterRepository.save(orderMaster);
         return orderDTO;

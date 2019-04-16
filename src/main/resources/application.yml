@@ -8,7 +8,10 @@ spring:
     show-sql: true
   jackson:
     default-property-inclusion: non_null
-#1、上线时需要改变日志输出的位置
+  #1、上线时需要改变日志输出的位置
+  redis:
+    host: 127.0.0.1
+    port: 6379
 server:
   servlet:
     context-path: "/WxSpringboot"
@@ -20,7 +23,15 @@ server:
 wechat:
   mpAppId: 1111111
   mpSecret: 11111111
+  openAppId: 1111111
+  openAppSecret: 11111
   mchId: adasdsd
   mchKey: xxxxxx
-  mkeyPath: xxxxxxx
+  #证书路径
+  mkeyPath: aaa
   notifyUrl: http://www.xiingluote.cn/WxSpringboot/pay/noify
+
+projecturl:
+  sellerLoginSuccess: http://localhost:8080
+  sellerExceptionUrl: http://localhost:8080
+
