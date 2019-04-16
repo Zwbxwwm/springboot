@@ -14,6 +14,7 @@ import com.springboot.sspringboot.entity.OrderMaster;
 import com.springboot.sspringboot.entity.ProductInfo;
 import com.springboot.sspringboot.exception.sellException;
 import com.springboot.sspringboot.service.IOrderService;
+import com.springboot.sspringboot.service.IWebSocket;
 import com.springboot.sspringboot.service.IWxPayService;
 import com.springboot.sspringboot.utils.IdUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -48,6 +49,9 @@ public class orderService implements IOrderService {
     @Autowired
     private IWxPayService iWxPayService;
 
+    @Autowired
+    private IWebSocket iWebSocket;
+
     @Override
     @Transactional
     public OrderDTO create(OrderDTO orderDTO) {
@@ -81,6 +85,9 @@ public class orderService implements IOrderService {
         List<CartDTO> cartDTOList = new ArrayList<>();
         cartDTOList = orderDTO.getOrderDetailList().stream().map(e ->new CartDTO(e.getProductId(),e.getProductQuantity())).collect(Collectors.toList());
         productInfoService.decreaseStock(cartDTOList);
+
+        //发送新订单消息到后台
+        iWebSocket.sendMessage(orderDTO.getOrderId());
         return orderDTO;
     }
 
