@@ -60,7 +60,7 @@ public class BuyerOrderController {
             throw new sellException(ExceptionEnum.PARAM_ERROR);
         }
         PageRequest pageRequest = PageRequest.of(page,size);
-        Page<OrderDTO> orderDTOPage =  iOrderService.findLis(openid,pageRequest);
+        Page<OrderDTO> orderDTOPage =  iOrderService.findList(openid,pageRequest);
 
         return ServerResponse.Success(orderDTOPage.getContent());
     }

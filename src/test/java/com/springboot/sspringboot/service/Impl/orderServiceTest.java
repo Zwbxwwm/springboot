@@ -66,7 +66,7 @@ public class orderServiceTest {
     @Test
     public void findLis() {
         PageRequest request = PageRequest.of(0,1);
-        Page<OrderDTO> orderDTOPage =orderService.findLis(OPENID,request);
+        Page<OrderDTO> orderDTOPage =orderService.findList(OPENID,request);
         Assert.assertNotEquals(0,orderDTOPage.getTotalElements());
     }
 

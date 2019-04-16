@@ -12,7 +12,7 @@ public interface IOrderService {
     OrderDTO findOne(String orderId);
 
     /**查询订单列表订单*/
-    Page<OrderDTO> findLis(String buyerOpenid, Pageable pageable);
+    Page<OrderDTO> findList(String buyerOpenid, Pageable pageable);
 
     /**取消订单*/
     OrderDTO cancelOrder(OrderDTO orderDTO);

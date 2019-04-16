@@ -60,13 +60,16 @@ public class orderService implements IOrderService {
         BigDecimal totalPrice =new BigDecimal(BigInteger.ZERO);
         for(OrderDetail orderDetail:orderDTO.getOrderDetailList()){
             //查询商品的数量、价格
-            ProductInfo productInfo = productInfoService.findOne(orderDetail.getProductId());
-            if(productInfo==null){
+            ProductInfo productInfo = null;
+            try {
+                productInfo = productInfoService.findOne(orderDetail.getProductId());
+            } catch (Exception e) {
+                log.info("【生成订单】无该商品id");
                 throw  new sellException(ExceptionEnum.NOT_EXIT);
             }
+
             //查询订单的总价
             totalPrice=productInfo.getProductPrice().multiply(new BigDecimal(orderDetail.getProductQuantity())).add(totalPrice);
-
             orderDetail.setDetailId(IdUtil.createUniqueKey());
             orderDetail.setOrderId(orderId);
             BeanUtils.copyProperties(productInfo,orderDetail);
@@ -114,7 +117,7 @@ public class orderService implements IOrderService {
     }
 
     @Override
-    public Page<OrderDTO> findLis(String buyerOpenid, Pageable pageable) {
+    public Page<OrderDTO> findList(String buyerOpenid, Pageable pageable) {
         Page<OrderMaster> orderMasterPage = orderMasterRepository.findByBuyerOpenid(buyerOpenid,pageable);
         List<OrderDTO> orderDTOList = OrderMaster2OrderDTOConverter.convert(orderMasterPage.getContent());
         Page<OrderDTO> pageable1 = new PageImpl<>(orderDTOList,pageable,orderMasterPage.getTotalElements());
