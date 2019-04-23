@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class SellerRepositoryTest {
     @Autowired
     private SellerRepository sellerRepository;
@@ -20,7 +20,7 @@ public class SellerRepositoryTest {
     @Test
     public void save(){
         SellerInfo sellerInfo = new SellerInfo();
-        sellerInfo.setSellerId(IdUtil.createUniqueKey());
+        sellerInfo.setId(IdUtil.createUniqueKey());
         sellerInfo.setPassword("123456");
         sellerInfo.setUsername("admin");
         sellerInfo.setOpenid("abc");

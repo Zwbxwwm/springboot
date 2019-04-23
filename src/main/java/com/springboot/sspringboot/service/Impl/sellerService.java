@@ -28,7 +28,7 @@ public class sellerService implements ISellerService {
     @Autowired
     private SellerRepository sellerRepository;
 
-    public Page<OrderDTO> findLis(Pageable pageable){
+    public Page<OrderDTO> findList(Pageable pageable){
         Page<OrderMaster> orderMasterPage = orderMasterRepository.findAll(pageable);
         List<OrderDTO> orderDTOList = OrderMaster2OrderDTOConverter.convert(orderMasterPage.getContent());
         Page<OrderDTO> pageable1 = new PageImpl<>(orderDTOList,pageable,orderMasterPage.getTotalElements());

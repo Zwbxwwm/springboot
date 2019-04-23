@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ProductInfoRepositoryTest {
 
     @Autowired
@@ -26,7 +26,7 @@ public class ProductInfoRepositoryTest {
         productInfo.setProductPrice(new BigDecimal(1.2));
         productInfo.setProductStock(100);
         productInfo.setProductDescription("便宜");
-        productInfo.setProductIcon("http://xxxx.cn");
+        productInfo.setProductIcon("http://5b0988e595225.cdn.sohucs.com/images/20180519/188de848275941f4b8f47b4627d447fd.jpeg");
         productInfo.setProductStatus(0);
         productInfo.setCategoryType(3);
 

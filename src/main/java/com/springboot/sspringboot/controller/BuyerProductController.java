@@ -12,16 +12,21 @@ import com.springboot.sspringboot.service.ICategoryService;
 import com.springboot.sspringboot.service.IProductInfoService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.hibernate.annotations.Cache;
 
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/buyer/product")
-public class BuyerProductController {
+public class BuyerProductController{
+
 
     @Autowired
     private IProductInfoService iProductInfoService;
@@ -30,6 +35,7 @@ public class BuyerProductController {
     private ICategoryService iCategoryService;
 
     @RequestMapping("/list")
+    @Cacheable(cacheNames = "product",key = "1234")
     public ServerResponse getAll(){
 //        查询所有上架的商品
         List<ProductInfo> productInfoList = iProductInfoService.findByProductStatus(ProductStatus.ON_SALE.getCode());

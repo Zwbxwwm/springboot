@@ -11,7 +11,7 @@ public interface ISellerService {
      * @param pageable
      * @return
      */
-    Page<OrderDTO> findLis(Pageable pageable);
+    Page<OrderDTO> findList(Pageable pageable);
 
     /** SESSION
      * 根据用户openid查询用户基本信息

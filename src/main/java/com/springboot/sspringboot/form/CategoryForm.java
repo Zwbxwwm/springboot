@@ -1,6 +1,7 @@
 package com.springboot.sspringboot.form;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,5 +16,6 @@ public class CategoryForm {
     private  String categoryName;
 
     /*  类目编号 */
+
     private Integer categoryType;
 }

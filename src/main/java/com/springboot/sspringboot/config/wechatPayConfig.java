@@ -3,7 +3,6 @@ package com.springboot.sspringboot.config;
 
 import com.lly835.bestpay.config.WxPayH5Config;
 import com.lly835.bestpay.service.impl.BestPayServiceImpl;
-import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;

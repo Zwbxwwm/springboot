@@ -27,7 +27,7 @@ public class sellerServiceTest {
     @Test
     public void findLis() {
         PageRequest pageable = PageRequest.of(1,2);
-        Page<OrderDTO> page =  iSellerService.findLis(pageable);
+        Page<OrderDTO> page =  iSellerService.findList(pageable);
         Assert.assertTrue("【买家端】查询所有的订单",page.getTotalElements()>0);
     }
 

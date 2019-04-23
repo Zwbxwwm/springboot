@@ -9,7 +9,7 @@ import javax.persistence.Id;
 @Entity
 public class SellerInfo {
     @Id
-    private String sellerId;
+    private String id;
 
     private String username;
 

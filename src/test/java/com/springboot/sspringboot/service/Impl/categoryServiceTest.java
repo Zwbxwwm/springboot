@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class categoryServiceTest {
 
     @Autowired
@@ -45,4 +45,5 @@ public class categoryServiceTest {
         ProductCategory productCategory1 = categoryService.save(productCategory);
         Assert.assertNotNull(productCategory1);
     }
+
 }

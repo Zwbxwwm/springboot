@@ -23,7 +23,7 @@
                     <div class="checkbox">
                         <label><input type="checkbox" />Check me out</label>
                     </div>
-                    <input hidden type="text" name="productId" value="${(category.categoryId)!''}">
+                    <input hidden type="text" name="categoryId" value="${(category.categoryId)!''}">
                     <button type="submit" class="btn btn-default">提交</button>
                 </form>
             </div>

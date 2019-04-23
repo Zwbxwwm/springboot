@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class productInfoServiceTest {
 
     @Autowired
@@ -25,8 +25,8 @@ public class productInfoServiceTest {
 
     @Test
     public void findOne() {
-        ProductInfo productInfo = productInfoService.findOne("123");
-        Assert.assertEquals("123",productInfo.getProductId());
+        ProductInfo productInfo = productInfoService.findOne("1");
+        Assert.assertEquals("1",productInfo.getProductId());
     }
 
     @Test
