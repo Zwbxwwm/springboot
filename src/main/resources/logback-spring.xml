@@ -34,7 +34,7 @@
         </encoder>
         <!--滚动策略-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>F:\\LogInfo/error.%d.log</fileNamePattern>
+            <fileNamePattern>E:\\LogInfo/error.%d.log</fileNamePattern>
         </rollingPolicy>
     </appender>
     <root level="info">
