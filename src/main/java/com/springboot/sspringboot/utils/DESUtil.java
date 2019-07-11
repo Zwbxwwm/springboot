@@ -181,10 +181,10 @@ public class DESUtil {
         data.put("client_secret","560c04df96cf65286f4b59f3307550f0");
         data.put("master_phone","00016027412");
         data.put("passenger_phone","11116027412");
-        data.put("auth_type",1);
-        data.put("city_id",36);
-        data.put("to_city_id",36);
-        data.put("require_level_list","900");
+        data.put("auth_type","1");
+//        data.put("city_id",36);
+//        data.put("to_city_id",36);
+//        data.put("require_level_list","900");
 
         String encryptData = encrypt(JSON.toJSONString(data), key);
         System.out.println("data_encode: " + encryptData);

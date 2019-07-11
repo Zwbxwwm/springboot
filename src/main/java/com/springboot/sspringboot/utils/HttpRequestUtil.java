@@ -1,6 +1,8 @@
 package com.springboot.sspringboot.utils;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.config.RequestConfig;
@@ -75,9 +77,14 @@ public class HttpRequestUtil {
         String url = "http://api.es.xiaojukeji.com/webapp/ticket/fetch";
         Map<String,String> param = new HashMap();
         param.put("client_id","141b476b6c59a928cd7297ac15d0b74f_test");
-        param.put("data_encode","Xe9g7NuVYHhe0IVFGcfKwOJYdMmEb+6RZtJhR+0IWJPyPFYk504J5dMwoGiav8b9r4uOeHC6sH1DN0VStekjgQdn9xm7JdMif0Op+v9cxIzRfUUo3UNmTorZd71fGybLNrIBGvSr8LxBcgHD5eMjPcMgYhBScWmdOq4BqxJ5spbCGE6yJ8NvUabVFJixkOj5wP8DPnnY8NiUXZwtmSKRDt6VHFNZx5SW7TJ96hfzQX4JGViZqZ+f8iTdQTOCOCqtq4JJbp8D1U9IjFSE57oMhSD3tHXlmuGNHB9k54dgbDlip5A8aI/rjEPWbAX4AN1v");
+        param.put("data_encode","Xe9g7NuVYHhuZ9B4EkBeqNLUmBhJpHcK4x74bq6jN2sVFTTh/X/phuEEqXFORnAbexvE" +
+                "fXTudqr457ZLbYieiTBElkhgrDZEwgxlCR07iiCMsmZNNwN6GYxLsartEShLDNcWXNGTqQ+gSFOpAGa6w54Pa2MWFtTUgXu" +
+                "5saNfyEQ3o27UacOSxB6WkcQXU5FsCzySOoEDGMJ5/bP/JCzJdZMDG+IfBv/5OKce5GV2b7jfmEfC8HCaiA==");
         String param2 = JSON.toJSONString(param);
         String result = doPostForJson(url,param2);
-        System.out.println(result);
+        JSONObject jsonObject = JSON.parseObject(result);
+
+        Object data = jsonObject.get("data");
+        System.out.println(jsonObject);
     }
 }
