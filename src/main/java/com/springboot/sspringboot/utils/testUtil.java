@@ -1,25 +1,39 @@
 package com.springboot.sspringboot.utils;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.math.BigInteger;
-import java.security.GeneralSecurityException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.*;
 
 public class testUtil {
-    public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
-        Map<String,String> param =new TreeMap<>((k1,k2)->{
-            return k1.compareTo(k2);
-        });
-        param.put("client_secret","560c04df96cf65286f4b59f3307550f0");
-        param.put("client_id","141b476b6c59a928cd7297ac15d0b74f_test");
-        param.put("grant_type","client_credentials");
-        param.put("phone","00016027412");
-        param.forEach((k,v)->{
-            System.out.println(k+":"+v);
-        });
+    public static void main(String[] args) {
+        myThread myThread1 = new myThread("任务一");
+        myThread myThread2 = new myThread("任务二");
+        Thread thread1 = new Thread(myThread1);
+        Thread thread2 = new Thread(myThread2);
+        thread1.start();
+        thread2.start();
+    }
+}
+
+class myThread implements Runnable{
+    private String taskName;
+
+    public myThread(String taskName) {
+        this.taskName = taskName;
+    }
+    synchronized public void doSomething() throws InterruptedException {
+        String taskName1 = taskName+"处理后";
+        System.out.println(taskName1);
+        Thread.sleep(3000);
+        System.out.println(taskName+"线程结束。。。");
     }
 
+
+    @Override
+    public void run() {
+        try {
+            doSomething();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
+
+
